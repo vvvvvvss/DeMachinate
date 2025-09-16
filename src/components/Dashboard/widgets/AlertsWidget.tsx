@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AlertTriangle, Clock, CheckCircle, TrendingUp, TrendingDown, BarChart2 } from 'lucide-react';
 
-// Add this interface if types.ts import fails
 interface Alert {
   id: string;
   ticker: string;
@@ -12,84 +11,114 @@ interface Alert {
   isRead: boolean;
 }
 
+interface StockData {
+  symbol: string;
+  price: number;
+  previousClose: number;
+  volume: number;
+  averageVolume: number;
+  change: number;
+  changePercent: number;
+}
+
 export const AlertsWidget: React.FC = () => {
-  
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
-  // Add initial data immediately
-  useEffect(() => {
-    setAlerts([
-      {
-        id: 'initial',
-        ticker: 'SYSTEM',
-        type: 'Info',
-        severity: 'low',
-        message: 'Initializing market data...',
-        timestamp: new Date().toLocaleTimeString(),
-        isRead: false
-      }
-    ]);
-  }, []);
-
-  // Modify the generateAlerts function
+  const WATCHED_SYMBOLS = ['AAPL', 'MSFT', 'GOOGL', 'NVDA', 'TSLA'];
+  
   const generateAlerts = async () => {
     try {
-      // Show loading state but keep existing alerts
       setIsLoading(true);
       setError(null);
 
-      // Test API call with single stock first
-      const response = await fetch(
-        `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=EK5K4U7IWQUCELTL`
-      );
+      const stockDataPromises = WATCHED_SYMBOLS.map(async (symbol) => {
+        // Add delay between requests to avoid API rate limits
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const response = await fetch(
+          `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=EK5K4U7IWQUCELTL`
+        );
 
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
+        if (!response.ok) throw new Error(`Failed to fetch data for ${symbol}`);
+        
+        const data = await response.json();
+        
+        if (data['Note']) {
+          throw new Error('API rate limit reached. Please try again later.');
+        }
 
-      const data = await response.json();
+        const quote = data['Global Quote'];
+        return {
+          symbol,
+          price: parseFloat(quote['05. price']),
+          previousClose: parseFloat(quote['08. previous close']),
+          volume: parseInt(quote['06. volume']),
+          averageVolume: parseInt(quote['06. volume']), // Using current volume as we don't have average
+          change: parseFloat(quote['09. change']),
+          changePercent: parseFloat(quote['10. change percent'].replace('%', ''))
+        };
+      });
 
-      // Log the response to see what we're getting
-      console.log('API Response:', data);
+      const stocksData = await Promise.all(stockDataPromises);
+      
+      // Generate real alerts based on market conditions
+      const newAlerts: Alert[] = [];
+      
+      stocksData.forEach((stock) => {
+        // Price change alerts
+        if (Math.abs(stock.changePercent) > 2) {
+          newAlerts.push({
+            id: `${stock.symbol}-price-${Date.now()}`,
+            ticker: stock.symbol,
+            type: stock.changePercent > 0 ? 'Significant Rise' : 'Significant Drop',
+            severity: Math.abs(stock.changePercent) > 5 ? 'critical' : 'high',
+            message: `Price ${stock.changePercent > 0 ? 'up' : 'down'} ${Math.abs(stock.changePercent).toFixed(2)}% to $${stock.price.toFixed(2)}`,
+            timestamp: new Date().toLocaleTimeString(),
+            isRead: false
+          });
+        }
 
-      // Add a test alert to verify rendering
-      setAlerts(prev => [
-        {
-          id: Date.now().toString(),
-          ticker: 'TEST',
-          type: 'Test Alert',
-          severity: 'low',
-          message: 'Testing alert system',
-          timestamp: new Date().toLocaleTimeString(),
-          isRead: false
-        },
-        ...prev
-      ]);
+        // Volume alerts
+        const volumeRatio = stock.volume / stock.averageVolume;
+        if (volumeRatio > 1.5) {
+          newAlerts.push({
+            id: `${stock.symbol}-volume-${Date.now()}`,
+            ticker: stock.symbol,
+            type: 'Volume Surge',
+            severity: volumeRatio > 2 ? 'high' : 'medium',
+            message: `Trading volume ${volumeRatio.toFixed(1)}x above average`,
+            timestamp: new Date().toLocaleTimeString(),
+            isRead: false
+          });
+        }
+      });
+
+      // Update alerts - keep recent ones
+      setAlerts(prevAlerts => {
+        const allAlerts = [...newAlerts, ...prevAlerts];
+        // Keep only last 24 hours of alerts
+        return allAlerts
+          .filter(alert => {
+            const alertTime = new Date(alert.timestamp);
+            const hoursDiff = (Date.now() - alertTime.getTime()) / (1000 * 60 * 60);
+            return hoursDiff < 24;
+          })
+          .slice(0, 50); // Keep maximum 50 alerts
+      });
 
     } catch (err) {
       console.error('Error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch data');
+      setError(err instanceof Error ? err.message : 'Failed to fetch market data');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Add some initial alerts for better UX
   useEffect(() => {
-    // Add sample alert while real data loads
-    setAlerts([{
-      id: 'initial-alert',
-      ticker: 'SYSTEM',
-      type: 'Info',
-      severity: 'low',
-      message: 'Loading market data...',
-      timestamp: new Date().toLocaleTimeString(),
-      isRead: false
-    }]);
-    
     generateAlerts();
+    // Update every 5 minutes
     const interval = setInterval(generateAlerts, 300000);
     return () => clearInterval(interval);
   }, []);
@@ -131,20 +160,32 @@ export const AlertsWidget: React.FC = () => {
     }
   };
 
-  // Update the return statement to handle all states
+  const markAllAsRead = () => {
+    setAlerts(prevAlerts => 
+      prevAlerts.map(alert => ({ ...alert, isRead: true }))
+    );
+  };
+
   return (
     <div className="space-y-4 p-4 bg-white dark:bg-navy-800 rounded-lg shadow">
       <div className="flex items-center justify-between">
         <h4 className="font-medium text-gray-900 dark:text-white">Market Alerts</h4>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
           <span className="text-xs text-gray-500 dark:text-gray-400">
             {alerts.filter(a => !a.isRead).length} unread
           </span>
           <button 
+            onClick={markAllAsRead}
+            className="text-xs text-teal-600 dark:text-teal-400 hover:text-teal-700"
+          >
+            Mark all read
+          </button>
+          <button 
             onClick={generateAlerts}
             className="p-1 hover:bg-gray-100 dark:hover:bg-navy-700 rounded-full"
+            disabled={isLoading}
           >
-            <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+            <Clock className={`w-4 h-4 text-gray-500 dark:text-gray-400 ${isLoading ? 'animate-spin' : ''}`} />
           </button>
         </div>
       </div>

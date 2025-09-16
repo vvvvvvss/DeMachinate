@@ -8,7 +8,7 @@ import { AlertsWidget } from './widgets/AlertsWidget';
 import { NewsWidget } from './widgets/NewsWidget';
 import { MetricsWidget } from './widgets/MetricsWidget';
 import { ChartWidget } from './widgets/ChartWidget';
-import { TodaysActivitiesWidget } from './widgets/TodaysActivitiesWidget';
+
 
 
 export const ModularDashboard: React.FC = () => {
@@ -182,8 +182,6 @@ export const ModularDashboard: React.FC = () => {
           return <MetricsWidget />;
         case 'chart':
           return <ChartWidget />;
-        case 'activities':
-          return <TodaysActivitiesWidget />;
         default:
           return <div>Widget type not implemented</div>;
       }

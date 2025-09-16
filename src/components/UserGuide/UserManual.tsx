@@ -358,7 +358,7 @@ export const UserManual: React.FC = () => {
                   </div>
 
                   {/* Data Protection */}
-                  <div className="bg-white dark:bg-navy-700 border border-gray-200 dark:border-navy-600 rounded-lg p-6">
+                  {/* <div className="bg-white dark:bg-navy-700 border border-gray-200 dark:border-navy-600 rounded-lg p-6">
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Shield className="w-5 h-5 mr-2 text-teal-600 dark:text-teal-400" />
                       Data Protection
@@ -380,7 +380,7 @@ export const UserManual: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             )}
