@@ -97,9 +97,6 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ onAnalyze, isAnaly
             </button>
           </div>
         </div>
-
-        {/* Advanced Options */}
-        
       </form>
     </div>
   );

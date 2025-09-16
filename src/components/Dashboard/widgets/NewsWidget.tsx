@@ -80,7 +80,7 @@ export const NewsWidget: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-3">
-          {news.map((item) => (
+          {news.slice(0, 5).map((item) => (
             <div
               key={item.id}
               onClick={() => handleNewsClick(item.url)}
@@ -117,16 +117,7 @@ export const NewsWidget: React.FC = () => {
         </div>
       )}
 
-      {news.length > 0 && (
-        <button 
-          onClick={() => {/* Implement view all logic */}}
-          className="w-full py-2 text-sm text-teal-600 dark:text-teal-400 
-                     hover:text-teal-700 dark:hover:text-teal-300 
-                     transition-colors"
-        >
-          View All News
-        </button>
-      )}
+      
     </div>
   );
 };

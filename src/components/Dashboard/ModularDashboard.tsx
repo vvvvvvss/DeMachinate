@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Layout, Save } from 'lucide-react';
 import { DashboardWidget } from './DashboardWidget';
-import { DashboardWidget as WidgetType, UserType } from '../../types';
+import { UserType, WidgetType } from './types/types';
 import { useAuth } from '../../contexts/AuthContext';
 import { WatchlistWidget } from './widgets/WatchlistWidget';
 import { AlertsWidget } from './widgets/AlertsWidget';
