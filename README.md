@@ -60,7 +60,8 @@ TradeWatch is a comprehensive stock market analysis and manipulation detection p
 
 **Backend Integration**
 
-- **Alpha Vantage API** for real-time stock market data and social media…
+- **Alpha Vantage API** for real-time stock market data and social medi
+- **Yahoo Finance API** for real-time stock market data
 - **GNews API** for financial news aggregation
 - **Custom JWT implementation** for secure authentication
 
