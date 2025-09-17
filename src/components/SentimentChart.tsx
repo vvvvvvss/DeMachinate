@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { SentimentData } from '../types';
 import { format } from 'date-fns';
 
@@ -30,17 +30,12 @@ export const SentimentChart: React.FC<SentimentChartProps> = ({ data }) => {
               tick={{ fontSize: 12 }}
               stroke="#666"
             />
-            <Tooltip 
-              contentStyle={{
-                backgroundColor: '#fff',
-                border: '1px solid #ccc',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            <Legend 
+              verticalAlign="top" 
+              height={36}
+              formatter={(value) => {
+                return value === 'newsSentiment' ? 'News Sentiment' : 'Social Media Sentiment';
               }}
-              formatter={(value: any, name: string) => [
-                value.toFixed(3),
-                name === 'tweetSentiment' ? 'Social Media Sentiment' : 'News Sentiment'
-              ]}
             />
             <Line 
               type="monotone" 
@@ -60,6 +55,19 @@ export const SentimentChart: React.FC<SentimentChartProps> = ({ data }) => {
               dot={false}
               activeDot={{ r: 4, fill: '#8B5CF6' }}
             />
+            <Tooltip 
+              contentStyle={{
+                backgroundColor: '#fff',
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}
+              formatter={(value: any, name: string) => [
+                value.toFixed(3),
+                name === 'newsSentiment' ? 'News Sentiment' : 'Social Media Sentiment'
+              ]}
+            />
+            
           </LineChart>
         </ResponsiveContainer>
       </div>
