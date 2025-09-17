@@ -4,9 +4,9 @@ import { DashboardWidget } from './DashboardWidget';
 import { UserType, WidgetType } from './types/types';
 import { useAuth } from '../../contexts/AuthContext';
 import { WatchlistWidget } from './widgets/WatchlistWidget';
-import { AlertsWidget } from './widgets/AlertsWidget';
+import AlertsWidget from './widgets/AlertsWidget';
 import { NewsWidget } from './widgets/NewsWidget';
-import { MetricsWidget } from './widgets/MetricsWidget';
+// import { MetricsWidget } from './widgets/MetricsWidget';
 import { ChartWidget } from './widgets/ChartWidget';
 
 
@@ -178,8 +178,8 @@ export const ModularDashboard: React.FC = () => {
           return <AlertsWidget />;
         case 'news':
           return <NewsWidget />;
-        case 'metrics':
-          return <MetricsWidget />;
+        // case 'metrics':
+        //   return <MetricsWidget />;
         case 'chart':
           return <ChartWidget />;
         default:
@@ -250,7 +250,7 @@ export const ModularDashboard: React.FC = () => {
                 { type: 'watchlist', title: 'Watchlist', description: 'Track your favorite stocks' },
                 { type: 'alerts', title: 'Alerts', description: 'Real-time notifications' },
                 { type: 'news', title: 'News Feed', description: 'Latest market news' },
-                { type: 'metrics', title: 'Metrics', description: 'Key performance indicators' },
+                // { type: 'metrics', title: 'Metrics', description: 'Key performance indicators' },
                 { type: 'chart', title: 'Chart', description: 'Interactive price charts' }
               ].map((widgetOption) => (
                 <button
