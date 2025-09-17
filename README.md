@@ -231,7 +231,6 @@ interface YahooFinanceConfig {
 - **API Key Issues**: Free APIs often have strict limits or require backend implementation
 - **Rate Limiting**: Too many requests can get blocked
 
-## Testing
 
 ## Future Development Roadmap
 
