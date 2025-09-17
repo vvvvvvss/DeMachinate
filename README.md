@@ -195,12 +195,7 @@ On enter the ticker, and the period of manipulation - the user gets a detailed r
 - **Functionality:** Aggregates the latest relevant news articles, correlates with price/sentiment spikes.
 - **API Usage:** GNews
 
-#### d. Metrics
-
-- **Functionality:** Key stock and sentiment metrics listed (e.g., volatility, price momentum, sentiment z-score).
-- **API Usage:** Derived via rolling calculation APIs on pre-fetched historical data.
-
-#### e. Chart
+#### d. Chart
 
 - **Functionality:** Interactive charts for price, volume, sentiment, and manipulation probability.
 - **Implementation:** D3.js, Chart.js, or Plotly for rendering; data sourced from backend APIs.
