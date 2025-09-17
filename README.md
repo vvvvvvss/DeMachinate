@@ -1,4 +1,5 @@
-# What is manipulation and how to investigate it?
+# TradeWatch - A stock market manipulation detection system
+## What is manipulation and how to investigate it?
 
 There are three types of manipulation: 
 
@@ -179,49 +180,47 @@ On enter the ticker, and the period of manipulation - the user gets a detailed r
 ### 5. Dashboard Components
 <img width="1908" height="895" alt="Screenshot 2025-09-12 221900" src="https://github.com/user-attachments/assets/9284513d-5bf8-458c-8eae-ff366dffcb9e" />  
 
-### a. Watchlist
+#### a. Watchlist
 
 - **Functionality:** Tracks selected tickers for ongoing manipulative activity; customizable by user.
 - **API Usage:** Alpha vantage API
 
-### b. Alerts
+#### b. Alerts
 
 - **Functionality:** Compilation of recently triggered manipulation or anomaly events for monitored stocks.
 - **API Usage:** Alert server feeds tied to backend database and event streaming system.
 
-### c. News Feed
+#### c. News Feed
 
 - **Functionality:** Aggregates the latest relevant news articles, correlates with price/sentiment spikes.
 - **API Usage:** GNews
 
-### d. Metrics
+#### d. Metrics
 
 - **Functionality:** Key stock and sentiment metrics listed (e.g., volatility, price momentum, sentiment z-score).
 - **API Usage:** Derived via rolling calculation APIs on pre-fetched historical data.
 
-### e. Chart
+#### e. Chart
 
 - **Functionality:** Interactive charts for price, volume, sentiment, and manipulation probability.
 - **Implementation:** D3.js, Chart.js, or Plotly for rendering; data sourced from backend APIs.
 
-### 6. Case Management System
+#### 6. Case Management System
 
 - **Functionality:** Manages manipulation case records, tracks evidence, logs analyst notes, and investigation outcomes.
 - **API Usage:** CRUD operations handled via case management REST endpoints.
 - **Features:** Assigns cases, links alerts/evidence, status tracking (e.g., open, closed, escalated).
 - **Notes:** Supports compliance/audit workflows.
 
-### 7. Enhanced Security Framework
+### 7. Security Module
 
-## Security Module
-
-## API Keys
+#### API Keys
 
 - **Functionality:** API key administration (generation, revocation, listing).
 - **Logic:** Governs market data and sentiment API access.
 - **Notes:** Essential for regulated environments, maintaining data access controls.
 
-## Audit & Privacy
+#### Audit & Privacy
 
 - **Functionality:** Shows logs/access history, governs privacy settings.
 - **Implementation:** Tables of user actions, API call records; data access policies.
@@ -274,12 +273,36 @@ interface GNewsConfig {
 }
 
 ```
+## Yahoo Finance API
+
+````jsx
+interface YahooFinanceConfig {
+  baseUrl: 'https://query1.finance.yahoo.com/v8/finance';
+  apiKey: null; // No API key required
+  endpoints: {
+    chart: '/chart';
+    quote: '/quote';
+    options: '/options';
+  };
+  parameters: {
+    interval: '1m' | '2m' | '5m' | '15m' | '30m' | '60m' | '90m' | '1h' | '1d' | '5d' | '1wk' | '1mo' | '3mo';
+    range: '1d' | '5d' | '1mo' | '3mo' | '6mo' | '1y' | '2y' | '5y' | '10y' | 'ytd' | 'max';
+    region: 'US' | 'AU' | 'CA' | 'FR' | 'DE' | 'HK' | 'IN' | 'IT' | 'ES' | 'GB' | 'SG';
+    lang: 'en-US';
+    includePrePost: boolean;
+    events: 'div' | 'split' | 'div,split';
+    corsDomain: 'finance.yahoo.com';
+  };
+}
+````
 
 ## Issues Faced:
 
 - **CORS Issues**: Most financial APIs don't allow direct browser access due to security policies
 - **API Key Issues**: Free APIs often have strict limits or require backend implementation
 - **Rate Limiting**: Too many requests can get blocked
+
+## Testing
 
 ## Future Development Roadmap
 
@@ -289,6 +312,6 @@ interface GNewsConfig {
 4. **Next-Level Alerts:** Develop advanced event-based alerting logic - send real-time mails on alerts.
 5. **Premium Data Sources.**
 
-## Quality Assurance & Testing
 
-### Testing Strategy
+
+
