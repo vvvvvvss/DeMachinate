@@ -163,22 +163,21 @@ class AlertService {
 On enter the ticker, and the period of manipulation - the user gets a detailed report on manipulation over that period.
 **Summary -** Provides includes a breakdown on suspected dates of manipulation and the suspect factor
 
-![Screenshot 2025-09-12 221805.png](attachment:8a085bec-796e-4bee-b0ce-ba7208bf4ff7:Screenshot_2025-09-12_221805.png)
 
-![Screenshot 2025-09-12 221818.png](attachment:99cb506e-6840-4b92-ac05-aa8adf978630:Screenshot_2025-09-12_221818.png)
+<img width="1919" height="913" alt="Screenshot 2025-09-12 221805" src="https://github.com/user-attachments/assets/b7e2c587-b51d-40bc-b650-6ac1c4f02b18" />  
+<img width="1912" height="925" alt="Screenshot 2025-09-12 221818" src="https://github.com/user-attachments/assets/a888f523-bc62-4a88-b1bf-d0e55f057d70" />  
 
 **Price Analysis -** Provides price movement visualizations, abnormal event flags, trend charts
-
-![Screenshot 2025-09-16 202616.png](attachment:cbda3cef-f0f9-4a76-b722-80ef2762fa25:Screenshot_2025-09-16_202616.png)
+<img width="1520" height="727" alt="Screenshot 2025-09-16 202616" src="https://github.com/user-attachments/assets/1a6efa7f-8087-402d-b121-37c96ad3afbf" />
 
 **Sentiment Analysis -** Provides time-series charts mapping aggregated tweet/news sentiment against stock data.
+<img width="1531" height="735" alt="Screenshot 2025-09-17 144122" src="https://github.com/user-attachments/assets/dbe6c2da-e239-4153-82a2-d64aab36c1fe" />
 
-![Screenshot 2025-09-17 144122.png](attachment:ff9be304-cb02-4ae5-875b-56b50d57a6b3:Screenshot_2025-09-17_144122.png)
 
 **Model Details -** Exposes model architecture, feature importance, ROC-AUC metrics.
 
 ### 5. Dashboard Components
-
+<img width="1908" height="895" alt="Screenshot 2025-09-12 221900" src="https://github.com/user-attachments/assets/9284513d-5bf8-458c-8eae-ff366dffcb9e" />
 ### a. Watchlist
 
 - **Functionality:** Tracks selected tickers for ongoing manipulative activity; customizable by user.
