@@ -85,10 +85,6 @@ interface AuthState {
 export const Login: React.FC = () => {
   // Features:
   // - JWT-based stateless authentication
-  // - Secure password handling with bcrypt
-  // - 2FA integration ready
-  // - Session timeout management
-  // - Password recovery workflow
 }
 ```
 
@@ -97,7 +93,6 @@ export const Login: React.FC = () => {
 ```jsx
 interface UserProfile {
   id: string;
-  email: string;
   preferences: {
     theme: 'light' | 'dark' | 'auto';
     notifications: NotificationSettings;
@@ -109,13 +104,6 @@ interface UserProfile {
 }
 ```
 
-**Functionality:**
-
-- Personalized dashboard configurations
-- Theme selection with system preference detection
-- API key generation and management
-- Subscription tier management
-- User activity tracking
 
 ### 3. Real-Time Alert System
 
