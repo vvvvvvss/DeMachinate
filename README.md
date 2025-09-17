@@ -200,7 +200,7 @@ On enter the ticker, and the period of manipulation - the user gets a detailed r
 - **Functionality:** Interactive charts for price, volume, sentiment, and manipulation probability.
 - **Implementation:** D3.js, Chart.js, or Plotly for rendering; data sourced from backend APIs.
 
-#### 6. Case Management System
+### 6. Case Management System
 
 - **Functionality:** Manages manipulation case records, tracks evidence, logs analyst notes, and investigation outcomes.
 - **API Usage:** CRUD operations handled via case management REST endpoints.
