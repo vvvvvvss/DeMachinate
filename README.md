@@ -34,11 +34,6 @@ The investigation system is multi-layered approach comprising of technical analy
 - **Correlation Breaks**: Sudden divergence between price and broader market trends
 - **News-Price Disconnects**: Price movements disproportionate to actual news impact
 
-### Pattern Recognition Methodology
-
-1. **Primary Screening using Isolation Forest**
-2. **Secondary Analysis with XG Boost**
-
 ## System Overview
 
 TradeWatch is a comprehensive stock market analysis and manipulation detection platform built Machine Learning models and modern web technologies. The system provides real-time market monitoring, advanced pattern recognition, and automated alert generation for detecting potential market manipulation activities.
@@ -47,11 +42,11 @@ TradeWatch is a comprehensive stock market analysis and manipulation detection p
 
 **Machine Learning Model**
 
-- **Isolation Forest**
+- **Isolation Forest - Primary Screening**
     - Identifies unusual data patterns across all metrics
     - Flags days with statistical anomalies in price, volume, or sentiment
     - Sets baseline "anomaly scores" for further investigation
-- **XG Boost**
+- **XG Boost - Secondary Analysis**
     - Evaluates flagged anomalies against known manipulation patterns
     - Assigns manipulation probability scores (0-1)
     - Identifies which specific metrics contributed to the detection
