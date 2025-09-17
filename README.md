@@ -105,45 +105,7 @@ interface UserProfile {
 ```
 
 
-### 3. Real-Time Alert System
-
-```jsx
-interface Alert {
-  id: string;
-  type: 'manipulation' | 'volatility' | 'volume_anomaly' | 'security' | 'news';
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  symbol: string;
-  message: string;
-  details: AlertDetails;
-  timestamp: Date;
-  isRead: boolean;
-  acknowledged: boolean;
-  actions: AlertAction[];
-}
-
-class AlertService {
-  private websocket: WebSocket;
-
-  // Methods:
-  // - Real-time alert processing with WebSocket
-  // - Alert filtering and prioritization
-  // - Batch alert processing for performance
-  // - Alert history with search and pagination
-  // - Custom alert rule creation
-  // - Integration with notification services
-}
-
-```
-
-**Advanced Features:**
-
-- Machine learning-based alert prioritization
-- Custom alert rule builder with visual interface
-- Multi-channel alert delivery (email, SMS, push, webhook)
-- Alert correlation and grouping
-- Historical alert analytics
-
-### 4. **Analysis Parameters**
+### 3. **Analysis Parameters**
 
 On enter the ticker, and the period of manipulation - the user gets a detailed report on manipulation over that period.
 **Summary -** Provides includes a breakdown on suspected dates of manipulation and the suspect factor
@@ -161,7 +123,7 @@ On enter the ticker, and the period of manipulation - the user gets a detailed r
 
 **Model Details -** Exposes model architecture, feature importance, ROC-AUC metrics.
 
-### 5. Dashboard Components
+### 4. Dashboard Components
 <img width="1908" height="895" alt="Screenshot 2025-09-12 221900" src="https://github.com/user-attachments/assets/9284513d-5bf8-458c-8eae-ff366dffcb9e" />  
 
 #### a. Watchlist
@@ -184,26 +146,14 @@ On enter the ticker, and the period of manipulation - the user gets a detailed r
 - **Functionality:** Interactive charts for price, volume, sentiment, and manipulation probability.
 - **Implementation:** D3.js, Chart.js, or Plotly for rendering; data sourced from backend APIs.
 
-### 6. Case Management System
+### 5. Case Management System
 
 - **Functionality:** Manages manipulation case records, tracks evidence, logs analyst notes, and investigation outcomes.
 - **API Usage:** CRUD operations handled via case management REST endpoints.
 - **Features:** Assigns cases, links alerts/evidence, status tracking (e.g., open, closed, escalated).
 - **Notes:** Supports compliance/audit workflows.
 
-### 7. Security Module
 
-#### API Keys
-
-- **Functionality:** API key administration (generation, revocation, listing).
-- **Logic:** Governs market data and sentiment API access.
-- **Notes:** Essential for regulated environments, maintaining data access controls.
-
-#### Audit & Privacy
-
-- **Functionality:** Shows logs/access history, governs privacy settings.
-- **Implementation:** Tables of user actions, API call records; data access policies.
-- **Notes:** Fulfills audit trails mandatory for financial applications.
 
 ## API Integration Architecture
 
