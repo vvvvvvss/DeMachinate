@@ -177,7 +177,8 @@ On enter the ticker, and the period of manipulation - the user gets a detailed r
 **Model Details -** Exposes model architecture, feature importance, ROC-AUC metrics.
 
 ### 5. Dashboard Components
-<img width="1908" height="895" alt="Screenshot 2025-09-12 221900" src="https://github.com/user-attachments/assets/9284513d-5bf8-458c-8eae-ff366dffcb9e" />
+<img width="1908" height="895" alt="Screenshot 2025-09-12 221900" src="https://github.com/user-attachments/assets/9284513d-5bf8-458c-8eae-ff366dffcb9e" />  
+
 ### a. Watchlist
 
 - **Functionality:** Tracks selected tickers for ongoing manipulative activity; customizable by user.
